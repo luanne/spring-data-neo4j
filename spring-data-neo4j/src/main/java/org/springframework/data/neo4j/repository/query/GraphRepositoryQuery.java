@@ -51,19 +51,19 @@ public class GraphRepositoryQuery implements RepositoryQuery {
     protected Object execute(Class<?> returnType, Class<?> concreteType, String cypherQuery, Map<String, Object> queryParams) {
 
         if (returnType.equals(Void.class) || returnType.equals(void.class)) {
-            session.execute(cypherQuery, queryParams);
+            session.query(cypherQuery, queryParams);
             return null;
         }
 
         if (graphQueryMethod.isModifyingQuery()) {
-            return session.execute(cypherQuery, queryParams);
+            return session.query(cypherQuery, queryParams);
         }
 
         if (Iterable.class.isAssignableFrom(returnType)) {
             // Special method to handle SDN Iterable<Map<String, Object>> behaviour.
             // TODO: Do we really want this method in an OGM? It's a little too low level and/or doesn't really fit.
             if (Map.class.isAssignableFrom(concreteType)) {
-                return session.query(cypherQuery, queryParams);
+                return session.query(cypherQuery, queryParams).queryResults();
             }
             return session.query(concreteType, cypherQuery, queryParams);
         }

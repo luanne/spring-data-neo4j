@@ -9,14 +9,24 @@
  * code for these subcomponents is subject to the terms and
  * conditions of the subcomponent's license, as noted in the LICENSE file.
  */
-package org.springframework.data.neo4j.extensions;
 
-import org.springframework.data.neo4j.extensions.domain.User;
-import org.springframework.stereotype.Repository;
+package org.springframework.data.neo4j.integration.conversion;
+
+import java.math.BigInteger;
+
+import org.springframework.core.convert.converter.Converter;
 
 /**
- * @author: Vince Bickers
+ * Nonsensical Spring converter for testing purposes
+ * @author Luanne Misquitta
  */
-@Repository
-public interface UserRepository extends CustomGraphRepository<User> {
+public class SpringBooleanToBigIntegerConverter implements Converter<Boolean, BigInteger> {
+
+	@Override
+	public BigInteger convert(Boolean source) {
+		if(source) {
+			return BigInteger.valueOf(101);
+		}
+		return BigInteger.valueOf(1);
+	}
 }

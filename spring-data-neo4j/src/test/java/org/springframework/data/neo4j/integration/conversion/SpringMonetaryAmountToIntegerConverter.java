@@ -10,21 +10,16 @@
  * conditions of the subcomponent's licence, as noted in the LICENSE file.
  */
 
-package org.springframework.data.neo4j.examples.movies.domain.queryresult;
+package org.springframework.data.neo4j.integration.conversion;
 
-import org.springframework.data.neo4j.annotation.QueryResult;
-import org.springframework.data.neo4j.examples.movies.domain.User;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.data.neo4j.integration.conversion.domain.MonetaryAmount;
 
-/**
- * {@link QueryResult} that wraps entity objects.
- */
-@QueryResult
-public class EntityWrappingQueryResult {
+public class SpringMonetaryAmountToIntegerConverter implements Converter<MonetaryAmount, Integer> {
 
-    private User user;
-
-    public User getUser() {
-        return user;
+    @Override
+    public Integer convert(MonetaryAmount source) {
+        return source != null ? source.getAmountAsSubUnits() : null;
     }
 
 }

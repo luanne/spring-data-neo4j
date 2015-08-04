@@ -9,14 +9,19 @@
  * code for these subcomponents is subject to the terms and
  * conditions of the subcomponent's license, as noted in the LICENSE file.
  */
-package org.springframework.data.neo4j.extensions;
 
-import org.springframework.data.neo4j.extensions.domain.User;
-import org.springframework.stereotype.Repository;
+package org.springframework.data.neo4j.integration.conversion;
+
+import org.springframework.core.convert.converter.Converter;
 
 /**
- * @author: Vince Bickers
+ * Nonsensical spring converter from a byte[] to an Integer, for test purposes
+ * @author Luanne Misquitta
  */
-@Repository
-public interface UserRepository extends CustomGraphRepository<User> {
+public class SpringByteArrayToIntegerConverter implements Converter<byte[],Integer> {
+
+	@Override
+	public Integer convert(byte[] source) {
+		return source.length;
+	}
 }

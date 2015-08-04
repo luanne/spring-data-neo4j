@@ -10,21 +10,18 @@
  * conditions of the subcomponent's licence, as noted in the LICENSE file.
  */
 
-package org.springframework.data.neo4j.examples.movies.domain.queryresult;
+package org.springframework.data.neo4j.integration.conversion;
 
-import org.springframework.data.neo4j.annotation.QueryResult;
-import org.springframework.data.neo4j.examples.movies.domain.User;
+import org.springframework.data.neo4j.integration.conversion.domain.PensionPlan;
+import org.springframework.data.neo4j.repository.GraphRepository;
+import org.springframework.stereotype.Repository;
 
 /**
- * {@link QueryResult} that wraps entity objects.
+ * @author Adam George
  */
-@QueryResult
-public class EntityWrappingQueryResult {
+@Repository
+public interface PensionRepository extends GraphRepository<PensionPlan> {
 
-    private User user;
-
-    public User getUser() {
-        return user;
-    }
+    // no additional repository methods
 
 }
